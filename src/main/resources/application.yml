@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: careflow-backend
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:careflow}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:azerfdsq}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
