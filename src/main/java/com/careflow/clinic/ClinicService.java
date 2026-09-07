@@ -48,7 +48,7 @@ public class ClinicService {
     }
 
     public ClinicResponse getClinicById(Long id) {
-        Clinic clinic = clinicRepository.findById(id).orElseThrow(() -> new RuntimeException("Clinic not found"));
+        Clinic clinic = clinicRepository.findById(id).orElseThrow(() -> new ClinicNotFoundException("Clinic not found"));
         return toResponse(clinic);
     }
 
@@ -59,7 +59,7 @@ public class ClinicService {
 
     public ClinicResponse deleteClinic(Long id) {
         Clinic clinic = clinicRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clinic not found"));
+                .orElseThrow(() -> new ClinicNotFoundException("Clinic not found"));
         clinicRepository.delete(clinic);
         return toResponse(clinic);
     }
@@ -67,7 +67,7 @@ public class ClinicService {
     public ClinicResponse updateClinic(Long id, ClinicUpdateRequest request) {
 
         Clinic existingClinic = clinicRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clinic not found"));
+                .orElseThrow(() -> new ClinicNotFoundException("Clinic not found"));
 
         existingClinic.setName(request.getName());
         existingClinic.setClinicType(request.getClinicType());
