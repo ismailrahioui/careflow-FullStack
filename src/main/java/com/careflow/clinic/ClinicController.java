@@ -2,6 +2,7 @@ package com.careflow.clinic;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public class ClinicController {
     @PostMapping
     public ResponseEntity<ClinicResponse> createClinic(@Valid @RequestBody ClinicCreateRequest request) {
 
-        ClinicResponse savedclinic = clinicService.createClinic(request);
-        return ResponseEntity.ok(savedclinic);
+        ClinicResponse savedClinic = clinicService.createClinic(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedClinic);
     }
 
     @PutMapping("/{id}")
@@ -45,8 +46,8 @@ public class ClinicController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ClinicResponse> deleteClinic(@PathVariable Long id) {
-        ClinicResponse deleteClinic = clinicService.deleteClinic(id);
-        return ResponseEntity.ok(deleteClinic);
+        clinicService.deleteClinic(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
