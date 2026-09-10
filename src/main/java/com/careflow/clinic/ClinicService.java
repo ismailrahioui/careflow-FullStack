@@ -48,7 +48,8 @@ public class ClinicService {
     }
 
     public ClinicResponse getClinicById(Long id) {
-        Clinic clinic = clinicRepository.findById(id).orElseThrow(() -> new ClinicNotFoundException("Clinic not found"));
+        Clinic clinic = clinicRepository.findById(id)
+                .orElseThrow(() -> new ClinicNotFoundException("Clinic not found"));
         return toResponse(clinic);
     }
 

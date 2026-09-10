@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS patients
+(
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    clinic_id BIGINT NOT NULL REFERENCES clinics(id),
+
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+
+    date_of_birth DATE NOT NULL,
+
+    CIN VARCHAR(25) NOT NULL UNIQUE ,
+
+    gender VARCHAR(20) NOT NULL
+        CHECK (gender IN ('MALE', 'FEMALE', 'OTHER')),
+
+    phone VARCHAR(14),
+    email VARCHAR(150),
+    address VARCHAR(100),
+
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
