@@ -27,11 +27,11 @@ public class PatientResponse {
         this.id = id;
     }
 
-    public Long getClinic() {
+    public Long getClinicId() {
         return clinicId;
     }
 
-    public void setClinic(Long clinic) {
+    public void setClinicId(Long clinic) {
         this.clinicId = clinic;
     }
 

@@ -23,7 +23,7 @@ public class PatientService {
         PatientResponse response = new PatientResponse();
 
         response.setId(patient.getId());
-        response.setClinic(patient.getClinic().getId());
+        response.setClinicId(patient.getClinic().getId());
         response.setFirstName(patient.getFirstName());
         response.setLastName(patient.getLastName());
         response.setDateOfBirth(patient.getDateOfBirth());
