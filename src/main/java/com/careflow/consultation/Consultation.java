@@ -5,6 +5,7 @@ import java.time.Instant;
 import com.careflow.appointment.Appointment;
 import com.careflow.clinic.Clinic;
 import com.careflow.patient.Patient;
+import com.careflow.user.User;
 
 import jakarta.persistence.*;
 
@@ -28,6 +29,10 @@ public class Consultation {
     @ManyToOne
     @JoinColumn(name = "appointment_id", nullable = false)
     private Appointment appointment;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private User doctor;
 
     @Column(columnDefinition = "TEXT")
     private String symptoms;
@@ -55,30 +60,6 @@ public class Consultation {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Clinic getClinicId() {
-        return clinic;
-    }
-
-    public void setClinicId(Clinic clinic) {
-        this.clinic = clinic;
-    }
-
-    public Patient getPatientId() {
-        return patient;
-    }
-
-    public void setPatientId(Patient patient) {
-        this.patient = patient;
-    }
-
-    public Appointment getAppointmentId() {
-        return appointment;
-    }
-
-    public void setAppointmentId(Appointment appointment) {
-        this.appointment = appointment;
     }
 
     public String getSymptoms() {
@@ -119,6 +100,38 @@ public class Consultation {
 
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public User getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(User doctor) {
+        this.doctor = doctor;
     }
 
 }

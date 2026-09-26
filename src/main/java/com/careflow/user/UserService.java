@@ -52,6 +52,7 @@ public class UserService {
         user.setFullName(request.getFullname());
         user.setUsername(request.getUsername());
         user.setRole(request.getRole());
+        user.setActive(true);
         String encryptedPassword = passwordEncoder.encode(request.getPassword());
         user.setPasswordHash(encryptedPassword);
 

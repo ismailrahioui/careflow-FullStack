@@ -2,14 +2,14 @@ package com.careflow.consultation;
 
 import java.time.Instant;
 
-
-
 public class ConsultationResponse {
 
     private Long id;
     private Long clinicId;
     private Long patientId;
     private Long appointmentId;
+    private Long doctorId;
+    private String doctorName;
     private String symptoms;
     private String diagnosis;
     private String treatment;
@@ -86,6 +86,22 @@ public class ConsultationResponse {
 
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
 }

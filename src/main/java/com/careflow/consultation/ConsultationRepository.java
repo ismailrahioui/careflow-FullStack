@@ -11,4 +11,5 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Long
 
     List<Consultation> findAllByClinicId(Long clinicId);
 
+    boolean existsByAppointmentIdAndClinicId(Long appointmentId , Long ClinicId);
 }

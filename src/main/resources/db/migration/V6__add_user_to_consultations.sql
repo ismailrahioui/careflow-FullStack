@@ -1,0 +1,1 @@
+ALTER TABLE consultations ADD COLUMN doctor_id BIGINT NOT NULL REFERENCES users (id)

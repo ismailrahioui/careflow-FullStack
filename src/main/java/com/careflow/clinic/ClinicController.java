@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -19,6 +20,7 @@ public class ClinicController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("@tenantSecurity.hasClinicAccess(#id)")
     public ResponseEntity<ClinicResponse> getClinicById(@PathVariable Long id) {
         ClinicResponse clinic = clinicService.getClinicById(id);
         return ResponseEntity.ok(clinic);
@@ -38,6 +40,7 @@ public class ClinicController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("@tenantSecurity.hasClinicAccess(#id)")
     public ResponseEntity<ClinicResponse> updateClinic(@PathVariable Long id,
             @Valid @RequestBody ClinicUpdateRequest request) {
         ClinicResponse updateClinic = clinicService.updateClinic(id, request);

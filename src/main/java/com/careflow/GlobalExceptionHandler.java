@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -42,4 +43,15 @@ public class GlobalExceptionHandler {
                 .body(apiError);
     }
 
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ApiError> handleAuthenticationException(AuthenticationException e) {
+        ApiError apiError = new ApiError();
+        apiError.setStatus(HttpStatus.UNAUTHORIZED.value());
+        apiError.setMessage("Invalid username or password");
+        apiError.setTimestamp(Instant.now());
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(apiError);
+    }
 }
+
