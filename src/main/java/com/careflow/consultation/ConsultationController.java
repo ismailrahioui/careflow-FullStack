@@ -29,6 +29,7 @@ public class ConsultationController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('DOCTOR', 'RECEPTIONIST')")
     public ResponseEntity<ConsultationResponse> getConsultationById(@PathVariable Long clinicId,
             @PathVariable Long id) {
 
@@ -37,12 +38,14 @@ public class ConsultationController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('DOCTOR', 'RECEPTIONIST')")
     public ResponseEntity<List<ConsultationResponse>> getAllConsultatinos(@PathVariable Long clinicId) {
         List<ConsultationResponse> consultations = consultationService.getAllConsultations(clinicId);
         return ResponseEntity.ok(consultations);
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('DOCTOR')")
     public ResponseEntity<ConsultationResponse> createConsultation(
             @PathVariable Long clinicId,
             @Valid @RequestBody ConsultationCreateRequest request) {
@@ -55,6 +58,7 @@ public class ConsultationController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('DOCTOR')")
     public ResponseEntity<ConsultationResponse> updateConsultation(@PathVariable Long id,
             @PathVariable Long clinicId,
             @Valid @RequestBody ConsultationUpdateRequest request) {
@@ -63,6 +67,7 @@ public class ConsultationController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('DOCTOR')")
     public ResponseEntity<Void> deleteConsultation(@PathVariable Long clinicId, @PathVariable Long id) {
         consultationService.deleteConsultation(id, clinicId);
         return ResponseEntity.noContent().build();

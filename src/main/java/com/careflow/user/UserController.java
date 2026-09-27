@@ -11,7 +11,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/clinics/{clinicId}/users")
-@PreAuthorize("@tenantSecurity.hasClinicAccess(#clinicId)")
+@PreAuthorize("@tenantSecurity.hasClinicAccess(#clinicId) and hasAnyRole('DOCTOR', 'RECEPTIONIST')")
 public class UserController {
 
     private final UserService userService;

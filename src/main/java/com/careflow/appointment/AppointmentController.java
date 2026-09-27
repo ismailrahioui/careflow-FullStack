@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/clinics/{clinicId}/appointments")
-@PreAuthorize("@tenantSecurity.hasClinicAccess(#clinicId)")
+@PreAuthorize("@tenantSecurity.hasClinicAccess(#clinicId) and hasAnyRole('DOCTOR', 'RECEPTIONIST')")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;

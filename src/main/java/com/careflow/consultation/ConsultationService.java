@@ -9,7 +9,6 @@ import com.careflow.appointment.AppointmentStatus;
 import com.careflow.clinic.Clinic;
 import com.careflow.clinic.ClinicNotFoundException;
 import com.careflow.clinic.ClinicRepository;
-import com.careflow.user.Roles;
 import com.careflow.user.User;
 import com.careflow.user.UserNotFoundException;
 import com.careflow.user.UserRepository;
@@ -113,6 +112,7 @@ public class ConsultationService {
                 .map(app -> toResponse(app)).toList();
     }
 
+    @Transactional
     public ConsultationResponse deleteConsultation(Long Id, Long clinicId) {
 
         Consultation consultation = consultationRepository.findByIdAndClinicId(Id, clinicId)
@@ -131,6 +131,7 @@ public class ConsultationService {
         return toResponse(consultation);
     }
 
+    @Transactional
     public ConsultationResponse updateConsultation(Long Id, Long clinicId, ConsultationUpdateRequest request) {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
