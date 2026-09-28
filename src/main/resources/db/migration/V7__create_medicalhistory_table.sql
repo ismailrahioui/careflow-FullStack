@@ -10,4 +10,3 @@ CREATE TABLE IF NOT EXISTS medical_history (
     notes TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-

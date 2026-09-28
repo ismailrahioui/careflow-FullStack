@@ -17,3 +17,7 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+  web:
+    error:
+      include-message: always
+    
