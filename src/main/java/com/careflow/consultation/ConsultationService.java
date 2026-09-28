@@ -71,7 +71,7 @@ public class ConsultationService {
         User docUser = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User Not Found"));
 
-        if (docUser.getClinic().getId().equals(clinic.getId())) {
+        if (!docUser.getClinic().getId().equals(clinic.getId())) {
             throw new AccessDeniedException("You are not Allowed");
         }
 
