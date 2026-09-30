@@ -142,8 +142,8 @@ public class PrescriptionService {
         }
 
         existingPrescription.setNotes(request.getNotes());
-        Prescription updated = prescriptionRepository.save(existingPrescription);
-        return toResponse(updated);
+        Prescription updatedPrescription = prescriptionRepository.save(existingPrescription);
+        return toResponse(updatedPrescription);
     }
 
     @Transactional
