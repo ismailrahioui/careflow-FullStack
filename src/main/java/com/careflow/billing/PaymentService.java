@@ -16,6 +16,10 @@ import com.careflow.user.User;
 import com.careflow.user.UserNotFoundException;
 import com.careflow.user.UserRepository;
 
+import com.careflow.notification.RealtimeNotification;
+import com.careflow.notification.RealtimeNotificationService;
+import java.util.UUID;
+
 @Service
 public class PaymentService {
 
@@ -24,15 +28,18 @@ public class PaymentService {
     private final ClinicRepository clinicRepository;
     private final UserRepository userRepository;
     private final AuditService auditService;
+    private final RealtimeNotificationService notificationService;
 
     public PaymentService(ClinicRepository clinicRepository,
             PaymentRepository paymentRepository, InvoiceRepository invoiceRepository,
-            UserRepository userRepository, AuditService auditService) {
+            UserRepository userRepository, AuditService auditService,
+            RealtimeNotificationService notificationService) {
         this.invoiceRepository = invoiceRepository;
         this.paymentRepository = paymentRepository;
         this.userRepository = userRepository;
         this.clinicRepository = clinicRepository;
         this.auditService = auditService;
+        this.notificationService = notificationService;
     }
 
     public PaymentResponse toResponse(Payment payment) {
@@ -111,6 +118,16 @@ public class PaymentService {
 
         auditService.log(clinicId, "CREATE", "PAYMENT", savedPayment.getId(),
                 "Payment of " + savedPayment.getAmount() + " recorded for invoice " + invoice.getInvoiceNumber());
+
+        try {
+            notificationService.broadcast(clinicId, new RealtimeNotification(
+                    UUID.randomUUID().toString(),
+                    clinicId,
+                    "PAYMENT",
+                    "Paiement Reçu",
+                    "Paiement de " + savedPayment.getAmount() + " MAD enregistré pour la facture " + invoice.getInvoiceNumber()
+            ));
+        } catch (Exception ignored) {}
 
         return toResponse(savedPayment);
     }

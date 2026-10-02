@@ -1,3 +1,4 @@
+
 package com.careflow.patient;
 
 import java.util.List;
@@ -8,15 +9,22 @@ import com.careflow.clinic.Clinic;
 import com.careflow.clinic.ClinicNotFoundException;
 import com.careflow.clinic.ClinicRepository;
 
+import com.careflow.notification.RealtimeNotification;
+import com.careflow.notification.RealtimeNotificationService;
+import java.util.UUID;
+
 @Service
 public class PatientService {
 
     private final PatientRepository patientRepository;
     private final ClinicRepository clinicRepository;
+    private final RealtimeNotificationService notificationService;
 
-    public PatientService(PatientRepository patientRepository, ClinicRepository clinicRepository) {
+    public PatientService(PatientRepository patientRepository, ClinicRepository clinicRepository,
+            RealtimeNotificationService notificationService) {
         this.patientRepository = patientRepository;
         this.clinicRepository = clinicRepository;
+        this.notificationService = notificationService;
     }
 
     public PatientResponse toResponse(Patient patient) {
@@ -55,6 +63,16 @@ public class PatientService {
         patient.setEmail(request.getEmail());
 
         Patient savedPatient = patientRepository.save(patient);
+
+        try {
+            notificationService.broadcast(clinicId, new RealtimeNotification(
+                    UUID.randomUUID().toString(),
+                    clinicId,
+                    "PATIENT",
+                    "Nouveau Patient Enregistré",
+                    "Le dossier de " + savedPatient.getFirstName() + " " + savedPatient.getLastName() + " a été créé avec succès."
+            ));
+        } catch (Exception ignored) {}
 
         return toResponse(savedPatient);
 

@@ -12,6 +12,10 @@ import com.careflow.patient.Patient;
 import com.careflow.patient.PatientNotFoundException;
 import com.careflow.patient.PatientRepository;
 
+import com.careflow.notification.RealtimeNotification;
+import com.careflow.notification.RealtimeNotificationService;
+import java.util.UUID;
+
 @Service
 public class AppointmentService {
 
@@ -19,13 +23,16 @@ public class AppointmentService {
     private final PatientRepository patientRepository;
     private final ClinicRepository clinicRepository;
     private final AuditService auditService;
+    private final RealtimeNotificationService notificationService;
 
     public AppointmentService(AppointmentRepository appointmentRepository, PatientRepository patientRepository,
-            ClinicRepository clinicRepository, AuditService auditService) {
+            ClinicRepository clinicRepository, AuditService auditService,
+            RealtimeNotificationService notificationService) {
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
         this.clinicRepository = clinicRepository;
         this.auditService = auditService;
+        this.notificationService = notificationService;
     }
 
     public AppointmentResponse toResponse(Appointment appointment) {
@@ -62,6 +69,16 @@ public class AppointmentService {
 
         auditService.log(clinicId, "CREATE", "APPOINTMENT", savedAppointment.getId(),
                 "Appointment scheduled for patient ID: " + patient.getId());
+
+        try {
+            notificationService.broadcast(clinicId, new RealtimeNotification(
+                    UUID.randomUUID().toString(),
+                    clinicId,
+                    "APPOINTMENT",
+                    "Nouveau Rendez-vous",
+                    "Rendez-vous planifié pour " + patient.getFirstName() + " " + patient.getLastName() + " à " + appointment.getAppointmentAt()
+            ));
+        } catch (Exception ignored) {}
 
         return toResponse(savedAppointment);
 
