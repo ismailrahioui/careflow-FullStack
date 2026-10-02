@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.careflow.audit.AuditService;
 import com.careflow.clinic.Clinic;
 import com.careflow.clinic.ClinicNotFoundException;
 import com.careflow.clinic.ClinicRepository;
@@ -17,12 +18,14 @@ public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final PatientRepository patientRepository;
     private final ClinicRepository clinicRepository;
+    private final AuditService auditService;
 
     public AppointmentService(AppointmentRepository appointmentRepository, PatientRepository patientRepository,
-            ClinicRepository clinicRepository) {
+            ClinicRepository clinicRepository, AuditService auditService) {
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
         this.clinicRepository = clinicRepository;
+        this.auditService = auditService;
     }
 
     public AppointmentResponse toResponse(Appointment appointment) {
@@ -57,6 +60,9 @@ public class AppointmentService {
 
         Appointment savedAppointment = appointmentRepository.save(appointment);
 
+        auditService.log(clinicId, "CREATE", "APPOINTMENT", savedAppointment.getId(),
+                "Appointment scheduled for patient ID: " + patient.getId());
+
         return toResponse(savedAppointment);
 
     }
@@ -80,6 +86,9 @@ public class AppointmentService {
                 .orElseThrow(() -> new AppointmentNotFoundException("Appointment not Found"));
         appointmentRepository.delete(appointment);
 
+        auditService.log(clinicId, "DELETE", "APPOINTMENT", Id,
+                "Appointment deleted for patient ID: " + appointment.getPatient().getId());
+
         return toResponse(appointment);
     }
 
@@ -92,6 +101,10 @@ public class AppointmentService {
         existingAppointment.setStatus(request.getStatus());
 
         Appointment updateAppointment = appointmentRepository.save(existingAppointment);
+
+        auditService.log(clinicId, "UPDATE", "APPOINTMENT", updateAppointment.getId(),
+                "Appointment updated, status: " + updateAppointment.getStatus());
+
         return toResponse(updateAppointment);
     }
 }

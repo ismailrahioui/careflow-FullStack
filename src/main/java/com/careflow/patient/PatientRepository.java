@@ -10,4 +10,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     List<Patient> findAllByClinicId(Long clinicId);
 
+    long countByClinicId(Long clinicId);
+
 }

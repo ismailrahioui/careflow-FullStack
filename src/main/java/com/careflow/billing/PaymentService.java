@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.careflow.audit.AuditService;
 import com.careflow.clinic.Clinic;
 import com.careflow.clinic.ClinicNotFoundException;
 import com.careflow.clinic.ClinicRepository;
@@ -22,14 +23,16 @@ public class PaymentService {
     private final InvoiceRepository invoiceRepository;
     private final ClinicRepository clinicRepository;
     private final UserRepository userRepository;
+    private final AuditService auditService;
 
     public PaymentService(ClinicRepository clinicRepository,
             PaymentRepository paymentRepository, InvoiceRepository invoiceRepository,
-            UserRepository userRepository) {
+            UserRepository userRepository, AuditService auditService) {
         this.invoiceRepository = invoiceRepository;
         this.paymentRepository = paymentRepository;
         this.userRepository = userRepository;
         this.clinicRepository = clinicRepository;
+        this.auditService = auditService;
     }
 
     public PaymentResponse toResponse(Payment payment) {
@@ -106,6 +109,9 @@ public class PaymentService {
 
         invoiceRepository.save(invoice);
 
+        auditService.log(clinicId, "CREATE", "PAYMENT", savedPayment.getId(),
+                "Payment of " + savedPayment.getAmount() + " recorded for invoice " + invoice.getInvoiceNumber());
+
         return toResponse(savedPayment);
     }
 
@@ -150,5 +156,8 @@ public class PaymentService {
         }
 
         invoiceRepository.save(invoice);
+
+        auditService.log(clinicId, "DELETE", "PAYMENT", paymentId,
+                "Payment #" + paymentId + " deleted for invoice " + invoice.getInvoiceNumber());
     }
 }

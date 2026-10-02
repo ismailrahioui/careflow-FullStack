@@ -6,6 +6,7 @@ import com.careflow.appointment.Appointment;
 import com.careflow.appointment.AppointmentNotFoundException;
 import com.careflow.appointment.AppointmentRepository;
 import com.careflow.appointment.AppointmentStatus;
+import com.careflow.audit.AuditService;
 import com.careflow.clinic.Clinic;
 import com.careflow.clinic.ClinicNotFoundException;
 import com.careflow.clinic.ClinicRepository;
@@ -26,16 +27,16 @@ public class ConsultationService {
     private final ClinicRepository clinicRepository;
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
+    private final AuditService auditService;
 
     public ConsultationService(ConsultationRepository consultationRepository,
             ClinicRepository clinicRepository, AppointmentRepository appointmentRepository,
-            UserRepository userRepository
-
-    ) {
+            UserRepository userRepository, AuditService auditService) {
         this.appointmentRepository = appointmentRepository;
         this.clinicRepository = clinicRepository;
         this.consultationRepository = consultationRepository;
         this.userRepository = userRepository;
+        this.auditService = auditService;
     }
 
     public ConsultationResponse toResponse(Consultation consultation) {
@@ -94,6 +95,9 @@ public class ConsultationService {
         appointmentRepository.save(appointment);
         Consultation SavedConsultation = consultationRepository.save(consultation);
 
+        auditService.log(clinicId, "CREATE", "CONSULTATION", SavedConsultation.getId(),
+                "Consultation created for patient ID: " + appointment.getPatient().getId() + " by Dr. " + docUser.getFullName());
+
         return toResponse(SavedConsultation);
 
     }
@@ -128,6 +132,9 @@ public class ConsultationService {
         }
         consultationRepository.delete(consultation);
 
+        auditService.log(clinicId, "DELETE", "CONSULTATION", Id,
+                "Consultation deleted by Dr. " + docUser.getFullName());
+
         return toResponse(consultation);
     }
 
@@ -150,6 +157,10 @@ public class ConsultationService {
         existingConsultation.setTreatment(request.getTreatment());
         existingConsultation.setNotes(request.getNotes());
         Consultation updateConsultation = consultationRepository.save(existingConsultation);
+
+        auditService.log(clinicId, "UPDATE", "CONSULTATION", updateConsultation.getId(),
+                "Consultation updated by Dr. " + docUser.getFullName());
+
         return toResponse(updateConsultation);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.careflow.appointment.Appointment;
 import com.careflow.appointment.AppointmentNotFoundException;
 import com.careflow.appointment.AppointmentRepository;
+import com.careflow.audit.AuditService;
 import com.careflow.clinic.Clinic;
 import com.careflow.clinic.ClinicNotFoundException;
 import com.careflow.clinic.ClinicRepository;
@@ -26,13 +27,15 @@ public class InvoiceService {
     private final UserRepository userRepository;
     private final ClinicRepository clinicRepository;
     private final InvoiceRepository invoiceRepository;
+    private final AuditService auditService;
 
     public InvoiceService(AppointmentRepository appointmentRepository, UserRepository userRepository,
-            ClinicRepository clinicRepository, InvoiceRepository invoiceRepository) {
+            ClinicRepository clinicRepository, InvoiceRepository invoiceRepository, AuditService auditService) {
         this.appointmentRepository = appointmentRepository;
         this.userRepository = userRepository;
         this.clinicRepository = clinicRepository;
         this.invoiceRepository = invoiceRepository;
+        this.auditService = auditService;
     }
 
     public InvoiceResponse toResponse(Invoice invoice) {
@@ -92,6 +95,9 @@ public class InvoiceService {
 
         Invoice SavedInvoice = invoiceRepository.save(invoice);
 
+        auditService.log(clinicId, "CREATE", "INVOICE", SavedInvoice.getId(),
+                "Invoice " + SavedInvoice.getInvoiceNumber() + " created with total amount: " + SavedInvoice.getTotalAmount());
+
         return toResponse(SavedInvoice);
 
     }
@@ -123,6 +129,9 @@ public class InvoiceService {
         invoice.setNotes(request.getNotes());
         Invoice updaInvoice = invoiceRepository.save(invoice);
 
+        auditService.log(clinicId, "UPDATE", "INVOICE", updaInvoice.getId(),
+                "Invoice " + updaInvoice.getInvoiceNumber() + " notes updated");
+
         return toResponse(updaInvoice);
 
     }
@@ -140,6 +149,9 @@ public class InvoiceService {
             throw new AccessDeniedException("You are not allowed to delete this invoice");
         }
         invoiceRepository.delete(invoice);
+
+        auditService.log(clinicId, "DELETE", "INVOICE", Id,
+                "Invoice " + invoice.getInvoiceNumber() + " deleted");
 
         return toResponse(invoice);
     }
