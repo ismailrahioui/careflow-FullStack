@@ -1,0 +1,300 @@
+﻿/* Billing & Payments Page - Matching Screenshot 3 */
+.payments-overview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header */
+.payments-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.payments-header-title h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.payments-header-title p {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.btn-generate-invoice {
+  background: #0c3888;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(12, 56, 136, 0.3);
+  transition: all 0.15s ease;
+}
+
+.btn-generate-invoice:hover {
+  background: #082963;
+  transform: translateY(-1px);
+}
+
+/* 3 KPI Cards matching Screenshot 3 */
+.payments-three-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.payment-kpi-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease;
+}
+
+.payment-kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.payment-kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.payment-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-icon-wrapper.blue {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.payment-icon-wrapper.red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.payment-icon-wrapper.green {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.payment-kpi-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.payment-kpi-badge.blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.payment-kpi-badge.red {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.payment-kpi-badge.green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.payment-kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 6px 0;
+}
+
+.payment-kpi-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+/* Two Column Bottom Grid */
+.payments-two-col-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* Factures cliniques Card */
+.invoices-panel-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  padding: 24px;
+}
+
+.invoices-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.invoices-panel-header h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.link-appliquer {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0c3888;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-appliquer:hover {
+  text-decoration: underline;
+}
+
+.invoices-search-bar {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+}
+
+.invoices-search-bar input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #0f172a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.invoices-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoices-table th {
+  padding: 12px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+[dir="rtl"] .invoices-table th {
+  text-align: right;
+}
+
+.invoices-table td {
+  padding: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+  color: #334155;
+}
+
+.invoices-table tr:hover {
+  background: #fafafa;
+}
+
+/* Historique des transactions Card */
+.transactions-panel-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  padding: 24px;
+}
+
+.transactions-panel-card h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 18px 0;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 10px;
+  transition: all 0.15s ease;
+}
+
+.transaction-item:hover {
+  background: #f1f5f9;
+}
+
+.transaction-info h5 {
+  margin: 0 0 2px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.transaction-info p {
+  margin: 0;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.transaction-amount {
+  font-size: 14px;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+@media (max-width: 1024px) {
+  .payments-three-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .payments-two-col-grid {
+    grid-template-columns: 1fr;
+  }
+}

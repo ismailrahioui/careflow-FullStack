@@ -1,0 +1,261 @@
+/* ========================================================
+   CareFlow Shared Modal System
+   Used across Patient, Appointment, Consultation, Payment & Dashboard modals
+   Ensures unified, perfectly centered popup with smooth animations
+   ======================================================== */
+
+.careflow-modal-overlay,
+.patient-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.careflow-modal-window,
+.patient-modal-window {
+  background: #ffffff;
+  width: 100%;
+  max-width: 620px;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modal-scale-up 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-scale-up {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+/* Modal Header - Deep Royal Blue Banner */
+.careflow-modal-header,
+.patient-modal-header {
+  background: #0c3888;
+  color: #ffffff;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}
+
+.careflow-modal-title,
+.patient-modal-title {
+  flex: 1;
+}
+
+.careflow-modal-title h2,
+.patient-modal-title h2 {
+  margin: 0 0 4px 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.careflow-modal-title p,
+.patient-modal-title p {
+  margin: 0;
+  font-size: 13px;
+  color: #bfdbfe;
+  font-weight: 400;
+}
+
+.careflow-modal-close,
+.patient-modal-close {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.careflow-modal-close:hover,
+.patient-modal-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Modal Body */
+.careflow-modal-body,
+.patient-modal-body {
+  padding: 24px;
+  background: #fcfdfe;
+  max-height: calc(85vh - 140px);
+  overflow-y: auto;
+}
+
+/* Form Layout & Controls */
+.careflow-form,
+.patient-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.careflow-form-row,
+.form-row-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.careflow-form-group,
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.careflow-form-group.full-width,
+.form-field-group.full-width {
+  grid-column: span 2;
+}
+
+.careflow-form-group label,
+.form-field-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.careflow-form-group input,
+.careflow-form-group select,
+.careflow-form-group textarea,
+.form-field-group input,
+.form-field-group select,
+.form-field-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+}
+
+.careflow-form-group input:focus,
+.careflow-form-group select:focus,
+.careflow-form-group textarea:focus,
+.form-field-group input:focus,
+.form-field-group select:focus,
+.form-field-group textarea:focus {
+  border-color: #0c3888;
+  box-shadow: 0 0 0 3px rgba(12, 56, 136, 0.12);
+}
+
+/* Informational Details Box */
+.careflow-details-box,
+.clinic-specific-box {
+  background: #f0f7ff;
+  border: 1px solid #bae0fd;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.careflow-details-box h4,
+.clinic-specific-box h4 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+/* Modal Footer */
+.careflow-modal-footer,
+.patient-modal-footer {
+  padding: 16px 24px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-modal-cancel {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-modal-cancel:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.btn-modal-submit {
+  background: #0c3888;
+  border: none;
+  color: #ffffff;
+  padding: 9px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-modal-submit:hover {
+  background: #082963;
+  transform: translateY(-1px);
+}
+
+.btn-modal-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* RTL Support */
+[dir="rtl"] .careflow-modal-window,
+[dir="rtl"] .patient-modal-window {
+  text-align: right;
+}
+
+[dir="rtl"] .careflow-modal-footer,
+[dir="rtl"] .patient-modal-footer {
+  justify-content: flex-start;
+}

@@ -1,0 +1,294 @@
+/* ========================================================
+   CareFlow Executive Reports & Analytics Styling
+   ======================================================== */
+
+.reports-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reports-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.reports-header-title h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.reports-header-title p {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.reports-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-report-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+
+.btn-report-action:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.btn-report-action.primary {
+  background: #0c3888;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-report-action.primary:hover {
+  background: #082963;
+  transform: translateY(-1px);
+}
+
+/* Tabs */
+.reports-tabs-bar {
+  display: flex;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+  width: fit-content;
+}
+
+.reports-tab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.reports-tab-item.active {
+  background: #0c3888;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(12, 56, 136, 0.25);
+}
+
+/* Analytics KPI Grid */
+.reports-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.report-kpi-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.report-kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-kpi-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-kpi-icon.blue { background: #e0f2fe; color: #0369a1; }
+.report-kpi-icon.green { background: #dcfce7; color: #15803d; }
+.report-kpi-icon.purple { background: #f3e8ff; color: #7e22ce; }
+.report-kpi-icon.amber { background: #fef3c7; color: #b45309; }
+
+.report-kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.report-kpi-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 4px 0 0 0;
+  letter-spacing: -0.02em;
+}
+
+.report-kpi-sub {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Two-Column Analytics Layout */
+.reports-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.reports-panel-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  padding: 22px;
+}
+
+.reports-panel-header {
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reports-panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.reports-panel-header span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Progress bar list */
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.progress-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.progress-track {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.progress-fill.green { background: #16a34a; }
+.progress-fill.blue { background: #0c3888; }
+.progress-fill.amber { background: #f59e0b; }
+.progress-fill.red { background: #dc2626; }
+.progress-fill.purple { background: #8b5cf6; }
+
+/* Audit Table & Badges */
+.audit-action-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.audit-action-badge.create { background: #dcfce7; color: #15803d; }
+.audit-action-badge.update { background: #e0f2fe; color: #0369a1; }
+.audit-action-badge.delete { background: #fee2e2; color: #b91c1c; }
+
+.audit-entity-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Printable PDF formatting */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .reports-header-actions,
+  .reports-tabs-bar,
+  .patients-toolbar,
+  nav,
+  aside,
+  header {
+    display: none !important;
+  }
+  .reports-page {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .report-kpi-card,
+  .reports-panel-card {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .reports-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}

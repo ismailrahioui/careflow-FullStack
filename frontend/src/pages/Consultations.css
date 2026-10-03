@@ -1,0 +1,624 @@
+/* Consultations Page - Matching Screenshot 2 */
+.consultations-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* Header */
+.consultations-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.consultations-header-title h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.consultations-header-title p {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.btn-new-consultation {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  transition: all 0.15s ease;
+}
+
+.btn-new-consultation:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Filter Row: Search & Date Filter */
+.consultations-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.consultations-search-box {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.consultations-search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #0f172a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.consultations-date-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-input-wrapper {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-input-wrapper input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: #334155;
+  background: transparent;
+  font-family: inherit;
+}
+
+.btn-clear-date {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+}
+
+.btn-clear-date:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* Consultations Table */
+.consultations-table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+.consultations-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+[dir="rtl"] .consultations-table {
+  text-align: right;
+}
+
+.consultations-table th {
+  background: #f8fafc;
+  padding: 16px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.consultations-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.consultations-table tr:hover {
+  background: #fafafa;
+}
+
+/* Right Sidebar Cards */
+.consultations-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card 1: Weekly Summary */
+.weekly-summary-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  padding: 22px;
+}
+
+.summary-card-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+}
+
+.summary-big-count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.summary-big-count h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.summary-big-count span {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.summary-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.summary-progress-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 9999px;
+}
+
+.summary-subtext {
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Card 2: Pending Sign-Offs */
+.pending-signoffs-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  padding: 22px;
+}
+
+.pending-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.pending-item-row:last-child {
+  border-bottom: none;
+}
+
+.pending-item-row span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.pending-badge {
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pending-badge.pink {
+  background: #fce7f3;
+  color: #db2777;
+}
+
+.pending-badge.blue {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+/* Card 3: Need a consultation CTA Card */
+.consultation-cta-card {
+  background: #f0f7ff;
+  border: 1px solid #bae0fd;
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.consultation-cta-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: #0369a1;
+}
+
+.consultation-cta-card p {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  color: #0284c7;
+  line-height: 1.4;
+}
+
+.btn-start-consultation {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.btn-start-consultation:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 1024px) {
+  .consultations-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Prescription Badges in Table */
+.btn-badge-presc {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-badge-presc:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.btn-badge-add-presc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  color: #64748b;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-badge-add-presc:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+/* Prescription Section in Consultation Modal */
+.prescription-section-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 6px;
+}
+
+.prescription-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.prescription-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prescription-section-title h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.prescription-section-title p {
+  margin: 2px 0 0 0;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.btn-add-item-sm {
+  background: #0c3888;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-add-item-sm:hover {
+  background: #082963;
+}
+
+.prescription-empty-hint {
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  background: #ffffff;
+}
+
+.prescription-empty-hint:hover {
+  border-color: #0c3888;
+  color: #0c3888;
+  background: #eff6ff;
+}
+
+.prescription-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prescription-item-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.prescription-item-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.item-number-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.btn-item-delete {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-item-delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.prescription-item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.prescription-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prescription-input-group.full {
+  grid-column: span 2;
+}
+
+.prescription-input-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.prescription-input-group input {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #0f172a;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+  font-family: inherit;
+}
+
+.prescription-input-group input:focus {
+  border-color: #0c3888;
+  box-shadow: 0 0 0 2px rgba(12, 56, 136, 0.12);
+}
+
+/* Printable Prescription Sheet Modal */
+.rx-clinic-banner {
+  border-bottom: 2px solid #0c3888;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.rx-clinic-logo h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #0c3888;
+  letter-spacing: -0.01em;
+}
+
+.rx-clinic-logo p {
+  margin: 3px 0 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.rx-meta-info {
+  text-align: right;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.rx-patient-info-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  gap: 16px;
+}
+
+.rx-symbol {
+  font-size: 28px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 900;
+  color: #0c3888;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.rx-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.rx-items-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  border-bottom: 1px solid #cbd5e1;
+  padding: 8px 6px;
+  text-transform: uppercase;
+}
+
+.rx-items-table td {
+  padding: 10px 6px;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #0f172a;
+}
+
+.rx-signature-block {
+  margin-top: 36px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rx-signature-box {
+  text-align: center;
+  border-top: 1px dashed #94a3b8;
+  padding-top: 8px;
+  min-width: 180px;
+  font-size: 12px;
+  color: #475569;
+}
+
