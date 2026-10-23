@@ -5,20 +5,33 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class JWTGenerator {
 
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    private SecretKey signingKey;
+
+    @PostConstruct
+    public void init() {
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        this.signingKey = Keys.hmacShaKeyFor(keyBytes);
+    }
+
     private SecretKey getSigningKey() {
-        byte[] keyBytes = SecurityConstants.JWT_SECRET.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(keyBytes);
+        return signingKey;
     }
 
     public String generateToken(Authentication authentication) {
@@ -44,15 +57,15 @@ public class JWTGenerator {
     }
 
     public boolean validateToken(String token) {
-        try {
-            Jwts.parser()
-                    .verifyWith(getSigningKey())
-                    .build()
-                    .parseSignedClaims(token);
-            return true;
-        } catch (Exception e) {
-            throw new AuthenticationCredentialsNotFoundException("JWT was expired or incorrect", e);
-        }
+    try {
+        Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token);
+        return true;
+    } catch (JwtException | IllegalArgumentException e) {
+        return false;
     }
+}
 
 }
