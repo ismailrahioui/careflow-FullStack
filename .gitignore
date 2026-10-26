@@ -20,6 +20,11 @@ target/
 *.iml
 *.ipr
 
+# Environment secrets
+.env
+.env.*
+!.env.example
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -32,3 +37,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Temporary diagnostics and generated Maven output
+backend/compile-debug.log
+backend/effective-pom

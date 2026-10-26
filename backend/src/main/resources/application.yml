@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:careflow}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:azerfdsq}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   mail:
     host: ${MAIL_HOST:smtp.gmail.com}
@@ -35,7 +35,7 @@ spring:
     locations: classpath:db/migration
   web:
     error:
-      include-message: always
+      include-message: never
 
 jwt:
   secret: ${JWT_SECRET}

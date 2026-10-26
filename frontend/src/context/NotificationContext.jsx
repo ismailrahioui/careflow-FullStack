@@ -69,7 +69,7 @@ export const NotificationProvider = ({ children }) => {
     // Setup SSE connection
     let eventSource = null;
     try {
-      const streamUrl = `http://localhost:8080/api/clinics/${user.clinicId}/notifications/stream?token=${encodeURIComponent(user.token || '')}`;
+      const streamUrl = `/api/clinics/${user.clinicId}/notifications/stream?token=${encodeURIComponent(user.token || '')}`;
       eventSource = new EventSource(streamUrl);
 
       eventSource.addEventListener('NOTIFICATION', (event) => {

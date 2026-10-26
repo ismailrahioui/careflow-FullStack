@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.AuthenticationException;
 
 import com.careflow.security.JWTGenerator;
 import com.careflow.user.User;
@@ -33,27 +34,36 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
-        Authentication authenticationRequest = UsernamePasswordAuthenticationToken
-                .unauthenticated(request.getUsername(), request.getPassword());
 
-        Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
+        Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
+                request.getUsername(),
+                request.getPassword());
+
+        Authentication authenticationResponse;
+
+        try {
+            authenticationResponse = authenticationManager.authenticate(authenticationRequest);
+        } catch (AuthenticationException e) {
+            throw e;
+        }
 
         String token = jwtGenerator.generateToken(authenticationResponse);
 
         User user = userRepository.findByUsername(authenticationResponse.getName())
-                .orElseThrow(
-                        () -> new UsernameNotFoundException("User not found: " + authenticationResponse.getName()));
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "User not found: " + authenticationResponse.getName()));
 
         LoginResponse response = new LoginResponse();
         response.setId(user.getId());
         response.setUsername(user.getUsername());
         response.setFullName(user.getFullName());
         response.setRole(user.getRole());
+
         if (user.getClinic() != null) {
             response.setClinicId(user.getClinic().getId());
         }
-        response.setToken(token);
 
+        response.setToken(token);
         return ResponseEntity.ok(response);
     }
 }
